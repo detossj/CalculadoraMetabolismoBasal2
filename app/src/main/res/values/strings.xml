@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CalculadoraMetabolismoBasal2</string>
+    <string name="title">Calculadora de metabolismo basal</string>
 </resources>

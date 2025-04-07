@@ -12,6 +12,7 @@ val Pink40 = Color(0xFF7D5260)
 
 
 val BackGround = Color.White
-val TitleAndInputs = Color(107,33,168)
+val Inputs = Color(107,33,168)
 val Button = Color(88,28,135)
+val Labels = Color.Black
 
