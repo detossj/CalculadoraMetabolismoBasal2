@@ -14,10 +14,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.MenuAnchorType
+import androidx.compose.material3.MenuDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -74,7 +76,10 @@ fun HomeScreen( navController: NavController ){
                     titleContentColor = Labels,
                     actionIconContentColor = Labels,
                     scrolledContainerColor = Labels,
-                    navigationIconContentColor = Labels
+                    navigationIconContentColor = Labels,
+
+
+
                 )
             )
         }
@@ -93,7 +98,9 @@ fun HomeScreen( navController: NavController ){
         ) {
 
             Row(
-                modifier = Modifier.padding(16.dp).fillMaxWidth()
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
             ) {
 
                 Column(
@@ -112,7 +119,9 @@ fun HomeScreen( navController: NavController ){
                     )
 
                     OutlinedTextField(
-                        modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 16.dp),
                         value = edad,
                         onValueChange = { edad = it },
                         placeholder = { Text("21") },
@@ -151,7 +160,18 @@ fun HomeScreen( navController: NavController ){
                             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded1) },
                             modifier = Modifier
                                 .menuAnchor(type = MenuAnchorType.PrimaryEditable, enabled = true)
-                                .fillMaxWidth()
+                                .fillMaxWidth(),
+                            colors = ExposedDropdownMenuDefaults.textFieldColors(
+                                focusedTextColor = Labels,
+                                unfocusedTextColor = Labels,
+                                focusedContainerColor = BackGround,
+                                unfocusedContainerColor = BackGround,
+                                focusedIndicatorColor = Labels,    // borde cuando enfocado
+                                unfocusedIndicatorColor = Labels,  // borde cuando no está enfocado
+                                disabledIndicatorColor = Labels,   // borde cuando está deshabilitado
+                                focusedLabelColor = Labels,
+                                unfocusedLabelColor = Labels
+                            )
                         )
 
                         ExposedDropdownMenu(
@@ -190,16 +210,28 @@ fun HomeScreen( navController: NavController ){
                     value = seleccionActivity,
                     onValueChange = {},
                     readOnly = true,
-                    label = { Text("Sexo") },
+                    label = { Text("Actividad física") },
                     trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded2) },
                     modifier = Modifier
                         .menuAnchor(type = MenuAnchorType.PrimaryEditable, enabled = true)
-                        .fillMaxWidth()
+                        .fillMaxWidth(),
+                    colors = ExposedDropdownMenuDefaults.textFieldColors(
+                        focusedTextColor = Labels,
+                        unfocusedTextColor = Labels,
+                        focusedContainerColor = BackGround,
+                        unfocusedContainerColor = BackGround,
+                        focusedIndicatorColor = Labels,    // borde cuando enfocado
+                        unfocusedIndicatorColor = Labels,  // borde cuando no está enfocado
+                        disabledIndicatorColor = Labels,   // borde cuando está deshabilitado
+                        focusedLabelColor = Labels,
+                        unfocusedLabelColor = Labels
+
+                    )
                 )
 
                 ExposedDropdownMenu(
                     expanded = expanded2,
-                    onDismissRequest = { expanded2 = false }
+                    onDismissRequest = { expanded2 = false },
                 ) {
                     activity.forEach { opcion ->
                         DropdownMenuItem(
@@ -207,7 +239,7 @@ fun HomeScreen( navController: NavController ){
                             onClick = {
                                 seleccionActivity = opcion
                                 expanded2 = false
-                            }
+                            },
                         )
                     }
                 }
