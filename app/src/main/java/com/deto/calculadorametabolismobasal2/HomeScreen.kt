@@ -15,6 +15,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.MenuDefaults
 import androidx.compose.material3.OutlinedTextField
@@ -33,8 +34,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.deto.calculadorametabolismobasal2.ui.theme.BackGround
 import com.deto.calculadorametabolismobasal2.ui.theme.Button
@@ -57,50 +60,22 @@ fun HomeScreen( navController: NavController ){
     var seleccionActivity by remember { mutableStateOf(activity[1]) }
 
 
-    Scaffold(
+    Column(
         modifier = Modifier.fillMaxSize(),
-        topBar = {
-            CenterAlignedTopAppBar(
-                modifier = Modifier.fillMaxWidth(),
-                title = {
-                    Box(
-                        modifier = Modifier.fillMaxWidth()
-                    ){
-                        Text(
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            text = stringResource(R.string.title),
-                            textAlign = TextAlign.Center
-                        )
-
-                    }
-
-                },
-                colors = TopAppBarColors(
-                    containerColor = BackGround,
-                    titleContentColor = Labels,
-                    actionIconContentColor = Labels,
-                    scrolledContainerColor = Labels,
-                    navigationIconContentColor = Labels,
 
 
-
-                )
-            )
-        }
-
-
-
-    ) { innerPadding ->
+    ) {
 
         Column(
             modifier = Modifier
-                .padding(innerPadding)
+
                 .fillMaxSize()
                 .background(BackGround),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
+            TopAppBar("Calculadora de metabolismo basal","Ingresa tus datos")
 
             Row(
                 modifier = Modifier
@@ -259,7 +234,7 @@ fun HomeScreen( navController: NavController ){
 
                 TextButton(
                     onClick = {},
-                    modifier = Modifier.fillMaxWidth().padding(0.dp),
+                    modifier = Modifier.fillMaxWidth().padding(top = 40.dp),
                     colors = ButtonColors(
                         contentColor = Labels,
                         containerColor = Color.LightGray,
@@ -273,7 +248,7 @@ fun HomeScreen( navController: NavController ){
 
                 TextButton(
                     onClick = {},
-                    modifier = Modifier.fillMaxWidth().padding(0.dp),
+                    modifier = Modifier.fillMaxWidth().padding(top = 10.dp, bottom = 100.dp),
                     colors = ButtonColors(
                         contentColor = BackGround,
                         containerColor = Button,
@@ -290,4 +265,35 @@ fun HomeScreen( navController: NavController ){
 
     }
 
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppBar( title: String, subtitle: String ){
+    LargeTopAppBar(
+        modifier = Modifier
+            .fillMaxWidth(),
+        colors = TopAppBarColors(
+            containerColor = BackGround,
+            titleContentColor = Labels,
+            actionIconContentColor = Button,
+            scrolledContainerColor = BackGround,
+            navigationIconContentColor = Button
+        ),
+        title = {
+            Column {
+                Text(
+                    text = title,
+                    color = Button,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 22.sp
+                )
+
+                Text(
+                    text = subtitle,
+                    fontSize = 14.sp
+                )
+            }
+        }
+    )
 }
