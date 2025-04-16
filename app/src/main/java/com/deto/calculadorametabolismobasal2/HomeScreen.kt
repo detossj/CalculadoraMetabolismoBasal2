@@ -19,6 +19,7 @@ import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.MenuDefaults
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -34,6 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -71,7 +73,7 @@ fun HomeScreen( navController: NavController ){
 
                 .fillMaxSize()
                 .background(BackGround),
-            verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
@@ -90,23 +92,10 @@ fun HomeScreen( navController: NavController ){
                         .padding(top = 16.dp)
                 ) {
 
-                    OutlinedTextField(
-                        modifier = Modifier.fillMaxWidth(),
-                        value = estatura,
-                        onValueChange = { estatura = it },
-                        placeholder = { Text("1.75") },
-                        label = { Text("Estatura (m)") }
-                    )
+                    CustomOutlinedTextField(estatura, { estatura = it }, "Estatura (m)", "1.75" )
 
-                    OutlinedTextField(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 16.dp),
-                        value = edad,
-                        onValueChange = { edad = it },
-                        placeholder = { Text("21") },
-                        label = { Text("Edad") }
-                    )
+                    CustomOutlinedTextField(edad, { edad = it },"Edad", "20")
+
 
                 }
 
@@ -117,22 +106,13 @@ fun HomeScreen( navController: NavController ){
                         .padding(top = 16.dp)
                 ) {
 
-                    OutlinedTextField(
-                        modifier = Modifier.fillMaxWidth(),
-                        value = peso,
-                        onValueChange = { peso = it },
-                        placeholder = { Text("75") },
-                        label = { Text("Peso (kgs)") }
-                    )
-
-
+                    CustomOutlinedTextField(peso, { peso = it },"Peso (kg)","75")
 
                     ExposedDropdownMenuBox(
                         expanded = expanded1,
                         onExpandedChange = { expanded1 = !expanded1 },
-                        modifier = Modifier.padding(top = 24.dp)
                     ) {
-                        TextField(
+                        OutlinedTextField(
                             value = seleccionSexs,
                             onValueChange = {},
                             readOnly = true,
@@ -140,7 +120,8 @@ fun HomeScreen( navController: NavController ){
                             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded1) },
                             modifier = Modifier
                                 .menuAnchor(type = MenuAnchorType.PrimaryEditable, enabled = true)
-                                .fillMaxWidth(),
+                                .fillMaxWidth()
+                                .padding(top = 40.dp),
                             colors = ExposedDropdownMenuDefaults.textFieldColors(
                                 focusedTextColor = Labels,
                                 unfocusedTextColor = Labels,
@@ -183,10 +164,9 @@ fun HomeScreen( navController: NavController ){
 
             ExposedDropdownMenuBox(
                 expanded = expanded2,
-                onExpandedChange = { expanded2 = !expanded2 },
-                modifier = Modifier.padding(16.dp)
+                onExpandedChange = { expanded2 = !expanded2 }
             ) {
-                TextField(
+                OutlinedTextField(
                     value = seleccionActivity,
                     onValueChange = {},
                     readOnly = true,
@@ -194,7 +174,8 @@ fun HomeScreen( navController: NavController ){
                     trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded2) },
                     modifier = Modifier
                         .menuAnchor(type = MenuAnchorType.PrimaryEditable, enabled = true)
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .padding(top = 40.dp).padding(horizontal = 16.dp),
                     colors = ExposedDropdownMenuDefaults.textFieldColors(
                         focusedTextColor = Labels,
                         unfocusedTextColor = Labels,
@@ -248,7 +229,7 @@ fun HomeScreen( navController: NavController ){
 
                 TextButton(
                     onClick = {},
-                    modifier = Modifier.fillMaxWidth().padding(top = 10.dp, bottom = 100.dp),
+                    modifier = Modifier.fillMaxWidth().padding(top = 40.dp),
                     colors = ButtonColors(
                         contentColor = BackGround,
                         containerColor = Button,
@@ -295,5 +276,28 @@ fun TopAppBar( title: String, subtitle: String ){
                 )
             }
         }
+    )
+}
+
+@Composable
+fun CustomOutlinedTextField( value: String, onValueChange: (String) -> Unit, label: String, placeholder: String ){
+
+    OutlinedTextField(
+        modifier = Modifier.fillMaxWidth().padding(top = 40.dp),
+        value = value,
+        onValueChange = onValueChange,
+        placeholder = { Text(placeholder) },
+        label = { Text(label) },
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedTextColor = Labels,
+            unfocusedTextColor = Labels,
+            focusedContainerColor = BackGround,
+            unfocusedContainerColor = BackGround,
+            focusedBorderColor = Labels,
+            unfocusedBorderColor = Labels,
+            focusedLabelColor = Labels,
+            unfocusedLabelColor = Labels
+        )
+
     )
 }
