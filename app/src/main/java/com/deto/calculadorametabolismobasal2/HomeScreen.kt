@@ -53,6 +53,10 @@ fun HomeScreen( navController: NavController ){
     var peso by remember { mutableStateOf("") }
     var edad by remember { mutableStateOf("") }
 
+    var error1 by remember { mutableStateOf(false) }
+    var error2 by remember { mutableStateOf(false) }
+    var error3 by remember { mutableStateOf(false) }
+
     val sexs = listOf("Hombre", "Mujer")
     var expanded1 by remember { mutableStateOf(false) }
     var seleccionSexs by remember { mutableStateOf(sexs[0]) }
@@ -92,9 +96,9 @@ fun HomeScreen( navController: NavController ){
                         .padding(top = 16.dp)
                 ) {
 
-                    CustomOutlinedTextField(estatura, { estatura = it }, "Estatura (m)", "1.75" )
+                    CustomOutlinedTextField(estatura, { estatura = it }, "Estatura (m)", "1.75", error1, "Ingrese la estatura")
 
-                    CustomOutlinedTextField(edad, { edad = it },"Edad", "20")
+                    CustomOutlinedTextField(edad, { edad = it },"Edad", "20", error2, "Ingrese la edad")
 
 
                 }
@@ -106,7 +110,7 @@ fun HomeScreen( navController: NavController ){
                         .padding(top = 16.dp)
                 ) {
 
-                    CustomOutlinedTextField(peso, { peso = it },"Peso (kg)","75")
+                    CustomOutlinedTextField(peso, { peso = it },"Peso (kg)","75", error3, "Ingrese el peso")
 
                     ExposedDropdownMenuBox(
                         expanded = expanded1,
@@ -280,7 +284,7 @@ fun TopAppBar( title: String, subtitle: String ){
 }
 
 @Composable
-fun CustomOutlinedTextField( value: String, onValueChange: (String) -> Unit, label: String, placeholder: String ){
+fun CustomOutlinedTextField( value: String, onValueChange: (String) -> Unit, label: String, placeholder: String, error: Boolean, supportingText: String ){
 
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth().padding(top = 40.dp),
@@ -297,7 +301,12 @@ fun CustomOutlinedTextField( value: String, onValueChange: (String) -> Unit, lab
             unfocusedBorderColor = Labels,
             focusedLabelColor = Labels,
             unfocusedLabelColor = Labels
-        )
+        ),
+        minLines = 1,
+        maxLines = 1,
+        isError = error,
+        supportingText = { if(error) Text(supportingText) else {} }
+
 
     )
 }
