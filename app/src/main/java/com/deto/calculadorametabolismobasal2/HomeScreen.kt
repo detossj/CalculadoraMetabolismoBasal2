@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.deto.calculadorametabolismobasal2.ui.theme.BackGround
 import com.deto.calculadorametabolismobasal2.ui.theme.Button
+import com.deto.calculadorametabolismobasal2.ui.theme.Error
 import com.deto.calculadorametabolismobasal2.ui.theme.Labels
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -68,7 +69,6 @@ fun HomeScreen( navController: NavController ){
 
     Column(
         modifier = Modifier.fillMaxSize(),
-
 
     ) {
 
@@ -168,7 +168,10 @@ fun HomeScreen( navController: NavController ){
 
             ExposedDropdownMenuBox(
                 expanded = expanded2,
-                onExpandedChange = { expanded2 = !expanded2 }
+                onExpandedChange = { expanded2 = !expanded2 },
+                modifier = Modifier
+                    .padding(top = 24.dp, start = 16.dp, end = 16.dp)
+
             ) {
                 OutlinedTextField(
                     value = seleccionActivity,
@@ -178,8 +181,7 @@ fun HomeScreen( navController: NavController ){
                     trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded2) },
                     modifier = Modifier
                         .menuAnchor(type = MenuAnchorType.PrimaryEditable, enabled = true)
-                        .fillMaxWidth()
-                        .padding(top = 40.dp).padding(horizontal = 16.dp),
+                        .fillMaxWidth(),
                     colors = ExposedDropdownMenuDefaults.textFieldColors(
                         focusedTextColor = Labels,
                         unfocusedTextColor = Labels,
@@ -232,7 +234,15 @@ fun HomeScreen( navController: NavController ){
                 }
 
                 TextButton(
-                    onClick = {},
+                    onClick = {
+                        error1 = estatura.isEmpty()
+                        error2 = edad.isEmpty()
+                        error3 = peso.isEmpty()
+
+                        if( !error1 && !error2 && !error3 ){
+                            navController.navigate(SecondScreen(12.0))
+                        }
+                    },
                     modifier = Modifier.fillMaxWidth().padding(top = 40.dp),
                     colors = ButtonColors(
                         contentColor = BackGround,
@@ -300,7 +310,12 @@ fun CustomOutlinedTextField( value: String, onValueChange: (String) -> Unit, lab
             focusedBorderColor = Labels,
             unfocusedBorderColor = Labels,
             focusedLabelColor = Labels,
-            unfocusedLabelColor = Labels
+            unfocusedLabelColor = Labels,
+            errorTextColor = Error,
+            errorSupportingTextColor = Error,
+            errorLabelColor = Error,
+            errorBorderColor = Error,
+            errorContainerColor = BackGround
         ),
         minLines = 1,
         maxLines = 1,
