@@ -15,4 +15,5 @@ val BackGround = Color.White
 val Inputs = Color(107,33,168)
 val Button = Color(88,28,135)
 val Labels = Color.Black
+val Error = Color.Red
 
