@@ -327,13 +327,28 @@ fun CustomOutlinedTextField( value: String, onValueChange: (String) -> Unit, lab
     )
 }
 
-fun TasaMetabolismoBasal( peso: Double, altura: Double, edad: Int, sexo: String): Double {
+fun TasaMetabolismoBasal( peso: Double, altura: Double, edad: Int, sexo: String ): Double {
 
     var resultado = 0.0
     if(sexo == "Hombre"){
         resultado = (10 * peso) + (6.25 * altura) - (5 *edad) + 5
     } else if(sexo == "Mujer"){
         resultado = (10 * peso) + (6.25 * altura) - (5 *edad) - 161
+    }
+
+    return resultado
+}
+
+fun Caloriastotales( actividad: String, peso: Double, altura: Double, edad: Int, sexo: String ): Double {
+
+    var resultado = 0.0
+
+    when{
+        actividad == "Baja (rara vez o nunca)" -> resultado = TasaMetabolismoBasal(peso,altura,edad,sexo) * 1.2
+        actividad == "Ligera (1-3 veces por semana)" -> resultado = TasaMetabolismoBasal(peso,altura,edad,sexo) * 1.375
+        actividad == "Moderada (3-5 veces por semana)" -> resultado = TasaMetabolismoBasal(peso,altura,edad,sexo) * 1.55
+        actividad == "Alta (6 veces por semana)" -> resultado = TasaMetabolismoBasal(peso,altura,edad,sexo) * 1.725
+        actividad == "Muy alta (Deportista Profesional)" -> resultado = TasaMetabolismoBasal(peso,altura,edad,sexo) * 1.9
     }
 
     return resultado
