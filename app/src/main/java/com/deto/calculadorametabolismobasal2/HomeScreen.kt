@@ -1,5 +1,6 @@
 package com.deto.calculadorametabolismobasal2
 
+import android.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -96,7 +97,7 @@ fun HomeScreen( navController: NavController ){
                         .padding(top = 16.dp)
                 ) {
 
-                    CustomOutlinedTextField(estatura, { estatura = it }, "Estatura (m)", "1.75", error1, "Ingrese la estatura")
+                    CustomOutlinedTextField(estatura, { estatura = it }, "Estatura (cm)", "175", error1, "Ingrese la estatura")
 
                     CustomOutlinedTextField(edad, { edad = it },"Edad", "20", error2, "Ingrese la edad")
 
@@ -324,4 +325,16 @@ fun CustomOutlinedTextField( value: String, onValueChange: (String) -> Unit, lab
 
 
     )
+}
+
+fun TasaMetabolismoBasal( peso: Double, altura: Double, edad: Int, sexo: String): Double {
+
+    var resultado = 0.0
+    if(sexo == "Hombre"){
+        resultado = (10 * peso) + (6.25 * altura) - (5 *edad) + 5
+    } else if(sexo == "Mujer"){
+        resultado = (10 * peso) + (6.25 * altura) - (5 *edad) - 161
+    }
+
+    return resultado
 }
