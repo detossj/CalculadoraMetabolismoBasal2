@@ -46,12 +46,13 @@ import com.deto.calculadorametabolismobasal2.ui.theme.BackGround
 import com.deto.calculadorametabolismobasal2.ui.theme.Button
 import com.deto.calculadorametabolismobasal2.ui.theme.Error
 import com.deto.calculadorametabolismobasal2.ui.theme.Labels
+import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen( navController: NavController ){
 
-    var estatura by remember { mutableStateOf("") }
+    var altura by remember { mutableStateOf("") }
     var peso by remember { mutableStateOf("") }
     var edad by remember { mutableStateOf("") }
 
@@ -59,13 +60,13 @@ fun HomeScreen( navController: NavController ){
     var error2 by remember { mutableStateOf(false) }
     var error3 by remember { mutableStateOf(false) }
 
-    val sexs = listOf("Hombre", "Mujer")
+    val sexos = listOf("Hombre", "Mujer")
     var expanded1 by remember { mutableStateOf(false) }
-    var seleccionSexs by remember { mutableStateOf(sexs[0]) }
+    var seleccionSexos by remember { mutableStateOf(sexos[0]) }
 
-    val activity = listOf("Baja (rara vez o nunca)", "Ligera (1-3 veces por semana)","Moderada (3-5 veces por semana)","Alta (6 veces por semana)","Muy alta (Deportista Profesional)")
+    val actividad = listOf("Baja (rara vez o nunca)", "Ligera (1-3 veces por semana)","Moderada (3-5 veces por semana)","Alta (6 veces por semana)","Muy alta (Deportista Profesional)")
     var expanded2 by remember { mutableStateOf(false) }
-    var seleccionActivity by remember { mutableStateOf(activity[1]) }
+    var seleccionActivitad by remember { mutableStateOf(actividad[1]) }
 
 
     Column(
@@ -97,7 +98,7 @@ fun HomeScreen( navController: NavController ){
                         .padding(top = 16.dp)
                 ) {
 
-                    CustomOutlinedTextField(estatura, { estatura = it }, "Estatura (cm)", "175", error1, "Ingrese la estatura")
+                    CustomOutlinedTextField(altura, { altura = it }, "Estatura (cm)", "175", error1, "Ingrese la estatura")
 
                     CustomOutlinedTextField(edad, { edad = it },"Edad", "20", error2, "Ingrese la edad")
 
@@ -118,7 +119,7 @@ fun HomeScreen( navController: NavController ){
                         onExpandedChange = { expanded1 = !expanded1 },
                     ) {
                         OutlinedTextField(
-                            value = seleccionSexs,
+                            value = seleccionSexos,
                             onValueChange = {},
                             readOnly = true,
                             label = { Text("Sexo") },
@@ -144,11 +145,11 @@ fun HomeScreen( navController: NavController ){
                             expanded = expanded1,
                             onDismissRequest = { expanded1 = false }
                         ) {
-                            sexs.forEach { opcion ->
+                            sexos.forEach { opcion ->
                                 DropdownMenuItem(
                                     text = { Text(opcion) },
                                     onClick = {
-                                        seleccionSexs = opcion
+                                        seleccionSexos = opcion
                                         expanded1 = false
                                     }
                                 )
@@ -175,7 +176,7 @@ fun HomeScreen( navController: NavController ){
 
             ) {
                 OutlinedTextField(
-                    value = seleccionActivity,
+                    value = seleccionActivitad,
                     onValueChange = {},
                     readOnly = true,
                     label = { Text("Actividad física") },
@@ -201,11 +202,11 @@ fun HomeScreen( navController: NavController ){
                     expanded = expanded2,
                     onDismissRequest = { expanded2 = false },
                 ) {
-                    activity.forEach { opcion ->
+                    actividad.forEach { opcion ->
                         DropdownMenuItem(
                             text = { Text(opcion) },
                             onClick = {
-                                seleccionActivity = opcion
+                                seleccionActivitad = opcion
                                 expanded2 = false
                             },
                         )
@@ -236,12 +237,12 @@ fun HomeScreen( navController: NavController ){
 
                 TextButton(
                     onClick = {
-                        error1 = estatura.isEmpty()
+                        error1 = altura.isEmpty()
                         error2 = edad.isEmpty()
                         error3 = peso.isEmpty()
 
                         if( !error1 && !error2 && !error3 ){
-                            navController.navigate(SecondScreen(12.0))
+                            navController.navigate(SecondScreen(CaloriasTotales(seleccionActivitad,peso.toDouble(),altura.toDouble(),edad.toInt(),seleccionSexos)))
                         }
                     },
                     modifier = Modifier.fillMaxWidth().padding(top = 40.dp),
@@ -339,7 +340,7 @@ fun TasaMetabolismoBasal( peso: Double, altura: Double, edad: Int, sexo: String 
     return resultado
 }
 
-fun Caloriastotales( actividad: String, peso: Double, altura: Double, edad: Int, sexo: String ): Double {
+fun CaloriasTotales( actividad: String, peso: Double, altura: Double, edad: Int, sexo: String ): Int {
 
     var resultado = 0.0
 
@@ -351,5 +352,5 @@ fun Caloriastotales( actividad: String, peso: Double, altura: Double, edad: Int,
         actividad == "Muy alta (Deportista Profesional)" -> resultado = TasaMetabolismoBasal(peso,altura,edad,sexo) * 1.9
     }
 
-    return resultado
+    return resultado.roundToInt()
 }
