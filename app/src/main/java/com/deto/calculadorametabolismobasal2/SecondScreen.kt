@@ -24,13 +24,13 @@ fun SecondScreen(navController: NavController, resultado: Int){
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(BackGround)
+            .background(BackGround),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
         Column(
-            modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier.padding(16.dp)
         ) {
 
             Card(
@@ -39,17 +39,47 @@ fun SecondScreen(navController: NavController, resultado: Int){
             ) {
 
                 Column(
-                    modifier = Modifier.padding(16.dp)
+                    modifier = Modifier.padding(32.dp)
                 ) {
                     Text(
                         text = "Tu Metabolismo Basal es de",
-                        fontSize = 16.sp
+                        fontSize = 18.sp,
+                        modifier = Modifier.padding(bottom = 20.dp)
                     )
                     Text(
                         text = "${resultado} Kcal/dia",
                         fontSize = 32.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(bottom = 40.dp)
                     )
+
+
+                    Text(
+                        text = "Calorias diarias a consumir para bajar:",
+                        modifier = Modifier.padding(bottom = 20.dp)
+                    )
+
+                    Text("1 kg al mes = ${CalcularDeficitCalorico(1,resultado)} Kcal/dia")
+                    Text("2 kg al mes = ${CalcularDeficitCalorico(2,resultado)} Kcal/dia")
+                    Text("3 kg al mes = ${CalcularDeficitCalorico(3,resultado)} Kcal/dia")
+                    Text("4 kg al mes = ${CalcularDeficitCalorico(4,resultado)} Kcal/dia")
+
+
+                    Text(
+                        text = "Calorias diarias a consumir para subir:",
+                        modifier = Modifier.padding(top = 40.dp,bottom = 20.dp)
+                    )
+
+                    Text("1 kg al mes = ${CalcularSuperavitCalorico(1,resultado)} Kcal/dia")
+                    Text("2 kg al mes = ${CalcularSuperavitCalorico(2,resultado)} Kcal/dia")
+                    Text("3 kg al mes = ${CalcularSuperavitCalorico(3,resultado)} Kcal/dia")
+                    Text("4 kg al mes = ${CalcularSuperavitCalorico(4,resultado)} Kcal/dia")
+
+                    Text(
+                        text = "Recuerda siempre consultar a un especialista en nutrición para bajar de peso de forma saludable.",
+                        modifier = Modifier.padding(top = 40.dp,bottom = 20.dp)
+                    )
+
                 }
 
 
