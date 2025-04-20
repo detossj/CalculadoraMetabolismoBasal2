@@ -58,3 +58,17 @@ fun SecondScreen(navController: NavController, resultado: Int){
     }
 
 }
+
+fun CalcularDeficitCalorico( cantidadKilos: Int, resultado: Int): Int {
+
+    val resultado = resultado - (7700 * cantidadKilos) / 30
+
+    return resultado
+}
+
+fun CalcularSuperavitCalorico( cantidadKilos: Int, resultado: Int): Int {
+
+    val resultado = resultado + (7700 * cantidadKilos) / 30
+
+    return resultado
+}
