@@ -11,7 +11,7 @@ import kotlinx.serialization.Serializable
 object Home
 
 @Serializable
-data class SecondScreen(val resultado: Double)
+data class SecondScreen(val resultado: Int)
 
 @Composable
 fun Navigation(){

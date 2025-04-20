@@ -19,7 +19,7 @@ import com.deto.calculadorametabolismobasal2.ui.theme.BackGround
 
 
 @Composable
-fun SecondScreen(navController: NavController, resultado: Double){
+fun SecondScreen(navController: NavController, resultado: Int){
 
     Column(
         modifier = Modifier
