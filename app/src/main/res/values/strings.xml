@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">CalculadoraMetabolismoBasal2</string>
     <string name="title">Calculadora de metabolismo basal</string>
+    <string name="home_title">Calculadora de metabolismo basal</string>
+    <string name="home_subtitle">Ingresa tus datos</string>
+    <string name="label_altura">Altura (cm)</string>
+    <string name="label_peso">Peso (kg)</string>
+    <string name="label_edad">Edad</string>
+    <string name="label_sexo">Sexo</string>
+    <string name="label_actividad">Actividad física</string>
+    <string name="placeholder_altura">175</string>
+    <string name="placeholder_peso">75</string>
+    <string name="placeholder_edad">21</string>
+    <string name="button_text">Calcular</string>
 </resources>
