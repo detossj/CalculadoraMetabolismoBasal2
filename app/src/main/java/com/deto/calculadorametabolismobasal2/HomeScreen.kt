@@ -45,6 +45,7 @@ import androidx.navigation.NavController
 import com.deto.calculadorametabolismobasal2.ui.theme.BackGround
 import com.deto.calculadorametabolismobasal2.ui.theme.Button
 import com.deto.calculadorametabolismobasal2.ui.theme.Error
+import com.deto.calculadorametabolismobasal2.ui.theme.Inputs
 import com.deto.calculadorametabolismobasal2.ui.theme.Labels
 import kotlin.math.roundToInt
 
@@ -305,8 +306,8 @@ fun CustomOutlinedTextField( value: String, onValueChange: (String) -> Unit, lab
         placeholder = { Text(placeholder) },
         label = { Text(label) },
         colors = OutlinedTextFieldDefaults.colors(
-            focusedTextColor = Labels,
-            unfocusedTextColor = Labels,
+            focusedTextColor = Inputs,
+            unfocusedTextColor = Inputs,
             focusedContainerColor = BackGround,
             unfocusedContainerColor = BackGround,
             focusedBorderColor = Labels,
