@@ -1,6 +1,6 @@
 package com.deto.calculadorametabolismobasal2
 
-import android.R
+import android.R.string
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -84,7 +84,7 @@ fun HomeScreen( navController: NavController ){
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            TopAppBar("Calculadora de metabolismo basal","Ingresa tus datos")
+            TopAppBar(stringResource(R.string.home_title),stringResource(R.string.home_subtitle))
 
             Row(
                 modifier = Modifier
@@ -99,9 +99,9 @@ fun HomeScreen( navController: NavController ){
                         .padding(top = 16.dp)
                 ) {
 
-                    CustomOutlinedTextField(altura, { altura = it }, "Estatura (cm)", "175", error1, "Ingrese la estatura")
+                    CustomOutlinedTextField(altura, { altura = it }, stringResource(R.string.label_altura), stringResource(R.string.placeholder_altura), error1, "Ingrese la estatura")
 
-                    CustomOutlinedTextField(edad, { edad = it },"Edad", "20", error2, "Ingrese la edad")
+                    CustomOutlinedTextField(edad, { edad = it },stringResource(R.string.label_edad), stringResource(R.string.placeholder_edad), error2, "Ingrese la edad")
 
 
                 }
@@ -113,7 +113,7 @@ fun HomeScreen( navController: NavController ){
                         .padding(top = 16.dp)
                 ) {
 
-                    CustomOutlinedTextField(peso, { peso = it },"Peso (kg)","75", error3, "Ingrese el peso")
+                    CustomOutlinedTextField(peso, { peso = it },stringResource(R.string.label_peso),stringResource(R.string.placeholder_peso), error3, "Ingrese el peso")
 
                     ExposedDropdownMenuBox(
                         expanded = expanded1,
@@ -123,7 +123,7 @@ fun HomeScreen( navController: NavController ){
                             value = seleccionSexos,
                             onValueChange = {},
                             readOnly = true,
-                            label = { Text("Sexo") },
+                            label = { Text(stringResource(R.string.label_sexo)) },
                             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded1) },
                             modifier = Modifier
                                 .menuAnchor(type = MenuAnchorType.PrimaryEditable, enabled = true)
@@ -180,7 +180,7 @@ fun HomeScreen( navController: NavController ){
                     value = seleccionActivitad,
                     onValueChange = {},
                     readOnly = true,
-                    label = { Text("Actividad física") },
+                    label = { Text(stringResource(R.string.label_actividad)) },
                     trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded2) },
                     modifier = Modifier
                         .menuAnchor(type = MenuAnchorType.PrimaryEditable, enabled = true)
@@ -255,7 +255,7 @@ fun HomeScreen( navController: NavController ){
                     ),
                     shape = RoundedCornerShape(10.dp)
                 ){
-                    Text("Calcular")
+                    Text(stringResource(R.string.button_text))
                 }
             }
 
