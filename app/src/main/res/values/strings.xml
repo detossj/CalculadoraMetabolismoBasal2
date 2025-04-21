@@ -12,4 +12,7 @@
     <string name="placeholder_peso">75</string>
     <string name="placeholder_edad">21</string>
     <string name="button_text">Calcular</string>
+    <string name="supportingText_altura">Ingrese la altura</string>
+    <string name="supportingText_peso">Ingrese el peso</string>
+    <string name="supportingText_edad">Ingrese la edad</string>
 </resources>
