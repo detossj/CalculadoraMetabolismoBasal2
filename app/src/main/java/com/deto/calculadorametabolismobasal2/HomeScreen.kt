@@ -99,9 +99,9 @@ fun HomeScreen( navController: NavController ){
                         .padding(top = 16.dp)
                 ) {
 
-                    CustomOutlinedTextField(altura, { altura = it }, stringResource(R.string.label_altura), stringResource(R.string.placeholder_altura), error1, "Ingrese la estatura")
+                    CustomOutlinedTextField(altura, { altura = it }, stringResource(R.string.label_altura), stringResource(R.string.placeholder_altura), error1, stringResource(R.string.supportingText_altura))
 
-                    CustomOutlinedTextField(edad, { edad = it },stringResource(R.string.label_edad), stringResource(R.string.placeholder_edad), error2, "Ingrese la edad")
+                    CustomOutlinedTextField(edad, { edad = it },stringResource(R.string.label_edad), stringResource(R.string.placeholder_edad), error2, stringResource(R.string.supportingText_edad))
 
 
                 }
@@ -113,7 +113,7 @@ fun HomeScreen( navController: NavController ){
                         .padding(top = 16.dp)
                 ) {
 
-                    CustomOutlinedTextField(peso, { peso = it },stringResource(R.string.label_peso),stringResource(R.string.placeholder_peso), error3, "Ingrese el peso")
+                    CustomOutlinedTextField(peso, { peso = it },stringResource(R.string.label_peso),stringResource(R.string.placeholder_peso), error3, stringResource(R.string.supportingText_peso))
 
                     ExposedDropdownMenuBox(
                         expanded = expanded1,
@@ -223,20 +223,6 @@ fun HomeScreen( navController: NavController ){
             ) {
 
                 TextButton(
-                    onClick = {},
-                    modifier = Modifier.fillMaxWidth().padding(top = 40.dp),
-                    colors = ButtonColors(
-                        contentColor = Labels,
-                        containerColor = Color.LightGray,
-                        disabledContentColor = BackGround,
-                        disabledContainerColor = Color.Transparent
-                    ),
-                    shape = RoundedCornerShape(10.dp)
-                ){
-                    Text("Limpiar")
-                }
-
-                TextButton(
                     onClick = {
                         error1 = altura.isEmpty()
                         error2 = edad.isEmpty()
@@ -246,7 +232,7 @@ fun HomeScreen( navController: NavController ){
                             navController.navigate(SecondScreen(CaloriasTotales(seleccionActivitad,peso.toDouble(),altura.toDouble(),edad.toInt(),seleccionSexos)))
                         }
                     },
-                    modifier = Modifier.fillMaxWidth().padding(top = 40.dp),
+                    modifier = Modifier.fillMaxWidth().padding(top = 56.dp),
                     colors = ButtonColors(
                         contentColor = BackGround,
                         containerColor = Button,
